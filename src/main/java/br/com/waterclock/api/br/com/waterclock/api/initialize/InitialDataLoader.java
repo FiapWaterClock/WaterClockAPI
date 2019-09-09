@@ -65,7 +65,7 @@ public class InitialDataLoader implements
     }
 
     @Transactional
-    private Privilege createPrivilegeIfNotFound(String name) {
+    Privilege createPrivilegeIfNotFound(String name) {
 
         Privilege privilege = privilegeRepository.findByName(name);
         if (privilege == null) {
@@ -76,7 +76,7 @@ public class InitialDataLoader implements
     }
 
     @Transactional
-    private Role createRoleIfNotFound(
+    Role createRoleIfNotFound(
             String name, Collection<Privilege> privileges) {
 
         Role role = roleRepository.findByName(name);
