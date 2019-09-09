@@ -16,17 +16,14 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/home", "/h2/**","/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
+        http.csrf().disable().
+                authorizeRequests()
+                .antMatchers("/home")
                 .permitAll()
-                .and()
-                .logout()
-                .permitAll();
-    }
+                .antMatchers("/h2/**")
+                .permitAll()
+                .anyRequest().authenticated().and();
 
+        http.headers().frameOptions().disable();
+    }
 }
