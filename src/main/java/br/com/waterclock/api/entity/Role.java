@@ -1,4 +1,4 @@
-package br.com.waterclock.api.br.com.waterclock.api.entity;
+package br.com.waterclock.api.entity;
 
 
 import javax.persistence.*;
@@ -29,8 +29,12 @@ public class Role {
         this.users = users;
         this.privileges = privileges;
     }
-    public Role(String name) {
 
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Role() {
     }
 
     public Long getId() {

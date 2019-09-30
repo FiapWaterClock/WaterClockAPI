@@ -1,13 +1,7 @@
-package br.com.waterclock.api.br.com.waterclock.api.entity;
-
-import br.com.waterclock.api.br.com.waterclock.api.repository.ClockRepository;
-import org.apache.tomcat.jni.Local;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package br.com.waterclock.api.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @SequenceGenerator(name = "clock", sequenceName = "SQ_CLOCK", allocationSize = 1)

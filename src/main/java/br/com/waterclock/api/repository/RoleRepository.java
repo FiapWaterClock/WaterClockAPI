@@ -1,6 +1,6 @@
-package br.com.waterclock.api.br.com.waterclock.api.repository;
+package br.com.waterclock.api.repository;
 
-import br.com.waterclock.api.br.com.waterclock.api.entity.Role;
+import br.com.waterclock.api.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

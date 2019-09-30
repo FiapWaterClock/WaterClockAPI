@@ -1,11 +1,11 @@
-package br.com.waterclock.api.br.com.waterclock.api.initialize;
+package br.com.waterclock.api.initialize;
 
-import br.com.waterclock.api.br.com.waterclock.api.entity.Privilege;
-import br.com.waterclock.api.br.com.waterclock.api.entity.Role;
-import br.com.waterclock.api.br.com.waterclock.api.entity.User;
-import br.com.waterclock.api.br.com.waterclock.api.repository.PrivilegeRepository;
-import br.com.waterclock.api.br.com.waterclock.api.repository.RoleRepository;
-import br.com.waterclock.api.br.com.waterclock.api.repository.UserRepository;
+import br.com.waterclock.api.entity.Privilege;
+import br.com.waterclock.api.entity.Role;
+import br.com.waterclock.api.entity.User;
+import br.com.waterclock.api.repository.PrivilegeRepository;
+import br.com.waterclock.api.repository.RoleRepository;
+import br.com.waterclock.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -38,6 +38,7 @@ public class InitialDataLoader implements
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
 
         if (alreadySetup)
             return;

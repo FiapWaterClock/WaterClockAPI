@@ -1,7 +1,7 @@
-package br.com.waterclock.api.br.com.waterclock.api.resource;
+package br.com.waterclock.api.resource;
 
-import br.com.waterclock.api.br.com.waterclock.api.entity.Clock;
-import br.com.waterclock.api.br.com.waterclock.api.repository.ClockRepository;
+import br.com.waterclock.api.entity.Clock;
+import br.com.waterclock.api.repository.ClockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

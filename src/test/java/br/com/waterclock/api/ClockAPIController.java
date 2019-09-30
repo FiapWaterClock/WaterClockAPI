@@ -4,14 +4,12 @@ import static com.jayway.restassured.RestAssured.*;
 
 import static org.hamcrest.Matchers.*;
 
-import br.com.waterclock.api.br.com.waterclock.api.entity.Clock;
+import br.com.waterclock.api.entity.Clock;
 import org.junit.Before;
 
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
-
-import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,8 +20,6 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.jayway.restassured.RestAssured;
-
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Clock.class)

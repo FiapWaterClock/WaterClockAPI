@@ -1,4 +1,4 @@
-package br.com.waterclock.api.br.com.waterclock.api.entity;
+package br.com.waterclock.api.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -102,6 +102,9 @@ public class User {
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
+
+
+
 }
 
 

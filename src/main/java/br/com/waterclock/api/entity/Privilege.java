@@ -1,4 +1,4 @@
-package br.com.waterclock.api.br.com.waterclock.api.entity;
+package br.com.waterclock.api.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -21,7 +21,10 @@ public class Privilege {
         this.roles = roles;
     }
     public Privilege(String name){
+        this.name = name;
+    }
 
+    public Privilege(){
     }
 
     public Long getId() {
