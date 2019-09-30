@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("clock")
+@RequestMapping("api/clock")
 public class ClockResource {
     @Autowired
     private ClockRepository repository;
