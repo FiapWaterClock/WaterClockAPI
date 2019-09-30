@@ -3,10 +3,8 @@ package br.com.waterclock.api.service;
 import br.com.waterclock.api.entity.Privilege;
 import br.com.waterclock.api.entity.Role;
 import br.com.waterclock.api.entity.User;
-import br.com.waterclock.api.repository.RoleRepository;
 import br.com.waterclock.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.MessageSource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,25 +24,13 @@ public class AppUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    //@Autowired
-    //private IUserService service;
-
-    //@Autowired
-    //private MessageSource messages;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
 
         User user = userRepository.findByEmail(email);
         if (user == null) {
-            return new org.springframework.security.core.userdetails.User(
-                    " ", " ", true, true, true, true,
-                    getAuthorities(Arrays.asList(
-                            roleRepository.findByName("ROLE_USER"))));
+            throw new UsernameNotFoundException("Not found " + email);
         }
 
         return new org.springframework.security.core.userdetails.User(
