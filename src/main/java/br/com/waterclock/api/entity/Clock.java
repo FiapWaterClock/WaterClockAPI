@@ -2,6 +2,7 @@ package br.com.waterclock.api.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @SequenceGenerator(name = "clock", sequenceName = "SQ_CLOCK", allocationSize = 1)
@@ -16,6 +17,8 @@ public class Clock {
 
     private String serial_number;
 
+    @OneToMany(mappedBy="id", cascade=CascadeType.ALL)
+    private List<Consumption> consumptions;
 
     public Clock() {
     }
@@ -56,5 +59,13 @@ public class Clock {
 
     public void setSerial_number(String serial_number) {
         this.serial_number = serial_number;
+    }
+
+    public List<Consumption> getConsumptions() {
+        return consumptions;
+    }
+
+    public void setConsumptions(List<Consumption> consumptions) {
+        this.consumptions = consumptions;
     }
 }

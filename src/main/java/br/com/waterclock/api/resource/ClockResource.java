@@ -21,7 +21,7 @@ public class ClockResource {
 
     @GetMapping("{id}")
     public Clock show(@PathVariable int id) {
-        return repository.findById(id).get();
+        return repository.findById(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
