@@ -24,7 +24,7 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/user/registration", method = RequestMethod.GET)
+    @RequestMapping(value = "/web/user/registration", method = RequestMethod.GET)
     @PreAuthorize("isAnonymous()")
     public String showRegistrationForm(WebRequest request, Model model) {
         UserDto userDto = new UserDto();
@@ -32,7 +32,7 @@ public class RegistrationController {
         return "registration";
     }
 
-    @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
+    @RequestMapping(value = "/web/user/registration", method = RequestMethod.POST)
     @PreAuthorize("isAnonymous()")
     public ModelAndView registerUserAccount(
             @ModelAttribute("user") @Valid UserDto accountDto,

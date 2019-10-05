@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,7 +20,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Value("${security.signing-key}")
 	private String signingKey;
@@ -47,30 +48,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 
 		http
-                .csrf()
-                .disable()
-
-                .authorizeRequests()
-                .antMatchers( "/h2/**")
-                .permitAll()
-
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/hello")
-                .failureUrl("/login?error=true")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll()
+				.antMatcher( "/api/**")
+				.authorizeRequests()
+				.anyRequest()
+				.authenticated()
 
                 .and()
                 .sessionManagement()
-		        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Note: was STATELESS
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
 		        .httpBasic()
-		        .realmName(securityRealm);
+		        .realmName(securityRealm)
+
+                .and()
+                .csrf()
+                .disable();
 	}
 
 	@Bean

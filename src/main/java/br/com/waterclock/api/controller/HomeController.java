@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/home")
+    @GetMapping("/web/home")
     @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
     public String welcomeHome() {
         return "home";
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/web/hello")
     @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
     public String hello(){
         return "hello";
