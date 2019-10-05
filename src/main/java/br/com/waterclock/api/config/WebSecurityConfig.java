@@ -1,4 +1,4 @@
-package br.com.waterclock.api;
+package br.com.waterclock.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

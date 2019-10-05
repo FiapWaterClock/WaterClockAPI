@@ -1,4 +1,4 @@
-package br.com.waterclock.api;
+package br.com.waterclock.api.config;
 
 import ch.qos.logback.access.servlet.TeeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Arrays;
 
 @Configuration
-public class FilterConfiguration {
+public class FilterConfig {
 
     @Autowired
     @Bean
