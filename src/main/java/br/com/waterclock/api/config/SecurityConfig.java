@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
 
                 .authorizeRequests()
-                .antMatchers( "/api/**", "/h2/**")
+                .antMatchers( "/h2/**")
                 .permitAll()
 
                 .and()

@@ -8,6 +8,7 @@ import br.com.waterclock.api.repository.ClockRepository;
 import br.com.waterclock.api.repository.ConsumptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,11 +24,13 @@ public class ConsumptionResource {
     @Autowired
     private ClockRepository clockRepository;
 
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
     @GetMapping("{clock_id}")
     public List<Consumption> index(@PathVariable int clock_id) {
         return repository.findByClockId(clock_id);
     }
 
+    @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Consumption create(@RequestBody ConsumptionModel consumptionModel) {
