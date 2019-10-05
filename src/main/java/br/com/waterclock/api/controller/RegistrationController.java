@@ -5,6 +5,7 @@ import br.com.waterclock.api.entity.UserDto;
 import br.com.waterclock.api.exception.EmailExistsException;
 import br.com.waterclock.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,7 @@ public class RegistrationController {
     private UserService userService;
 
     @RequestMapping(value = "/user/registration", method = RequestMethod.GET)
+    @PreAuthorize("isAnonymous()")
     public String showRegistrationForm(WebRequest request, Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
@@ -31,6 +33,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
+    @PreAuthorize("isAnonymous()")
     public ModelAndView registerUserAccount(
             @ModelAttribute("user") @Valid UserDto accountDto,
             BindingResult result,
