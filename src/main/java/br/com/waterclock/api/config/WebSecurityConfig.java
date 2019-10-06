@@ -9,37 +9,20 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableWebSecurity
-@Order(2)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
 
-		http.headers().frameOptions().disable();
+		http.headers().frameOptions().sameOrigin();
 
-		http
-				.antMatcher( "/web/**")
+        http
+                .authorizeRequests()
+                .antMatchers("/h2/**")
+                .permitAll()
 
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-
-				.and()
-				.authorizeRequests()
-				.antMatchers( "/h2/**")
-				.permitAll()
-
-				.and()
-				.formLogin()
-				.loginPage("/login")
-				.defaultSuccessUrl("/web/hello")
-				.failureUrl("/login?error=true")
-				.permitAll()
-				.and()
-				.logout()
-				.permitAll()
-
-				.and()
-				.csrf()
-				.disable();
-	}
+                .and()
+                .csrf()
+                .disable();
+    }
 }

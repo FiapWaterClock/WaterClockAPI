@@ -1,5 +1,8 @@
 package br.com.waterclock.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -48,18 +51,22 @@ public class UserDto {
         this.lastName = lastName;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @JsonIgnore
     public String getMatchingPassword() {
         return matchingPassword;
     }
 
+    @JsonProperty
     public void setMatchingPassword(String matchingPassword) {
         this.matchingPassword = matchingPassword;
     }

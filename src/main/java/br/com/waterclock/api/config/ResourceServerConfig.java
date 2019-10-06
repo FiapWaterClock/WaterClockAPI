@@ -27,14 +27,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.headers().frameOptions().disable();
-
         http
                 .requestMatchers()
 
                 .and()
                 .authorizeRequests()
-                //.antMatchers("/h2/**", "/home", "/login", "/hello").permitAll()
                 .antMatchers("/api/**").authenticated();
     }
 }

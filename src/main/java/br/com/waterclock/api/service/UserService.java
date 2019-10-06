@@ -3,6 +3,7 @@ package br.com.waterclock.api.service;
 import br.com.waterclock.api.entity.User;
 import br.com.waterclock.api.entity.UserDto;
 import br.com.waterclock.api.exception.EmailExistsException;
+import br.com.waterclock.api.exception.PasswordException;
 import br.com.waterclock.api.repository.RoleRepository;
 import br.com.waterclock.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,15 @@ public class UserService implements IUserService {
     @Transactional
     @Override
     public User registerNewUserAccount(UserDto accountDto)
-            throws EmailExistsException {
+            throws EmailExistsException, PasswordException {
 
         if (emailExists(accountDto.getEmail())) {
-            throw new EmailExistsException("There is an account with that email address:"
+            throw new EmailExistsException("There is an account with that email address: "
                     + accountDto.getEmail());
+        }
+
+        if (!accountDto.getPassword().equals(accountDto.getMatchingPassword())) {
+            throw new PasswordException("The passwords do not match");
         }
 
         User user = new User();

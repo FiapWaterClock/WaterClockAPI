@@ -22,7 +22,7 @@ import java.util.List;
 public class InitialDataLoader implements
         ApplicationListener<ContextRefreshedEvent> {
 
-    boolean alreadySetup = false;
+    private boolean alreadySetup = false;
 
     @Autowired
     private UserRepository userRepository;
@@ -38,31 +38,31 @@ public class InitialDataLoader implements
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-
-
-        if (alreadySetup)
-            return;
-        Privilege readPrivilege
-                = createPrivilegeIfNotFound("READ_PRIVILEGE");
-        Privilege writePrivilege
-                = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
-
-        List<Privilege> adminPrivileges = Arrays.asList(
-                readPrivilege, writePrivilege);
+        if (alreadySetup) return;
+        Privilege readPrivilege = createPrivilegeIfNotFound("READ_PRIVILEGE");
+        Privilege writePrivilege = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
+        List<Privilege> adminPrivileges = Arrays.asList(readPrivilege, writePrivilege);
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
         createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
-
-        Role adminRole = roleRepository.findByName("ROLE_ADMIN");
-        User user = new User();
-        user.setFirstName("Test");
-        user.setLastName("Test");
-        user.setPassword(passwordEncoder.encode("test"));
-        user.setEmail("test@test.com");
-        user.setRoles(Arrays.asList(adminRole));
-        user.setEnabled(true);
-        userRepository.save(user);
-
+        createAdminUserIfNotFound();
         alreadySetup = true;
+    }
+
+    @Transactional
+    void createAdminUserIfNotFound() {
+        String adminEmail = "test@test.com";
+        User user = userRepository.findByEmail(adminEmail);
+        if (user == null) {
+            Role adminRole = roleRepository.findByName("ROLE_ADMIN");
+            user = new User();
+            user.setFirstName("Test");
+            user.setLastName("Test");
+            user.setPassword(passwordEncoder.encode("test"));
+            user.setEmail(adminEmail);
+            user.setRoles(Arrays.asList(adminRole));
+            user.setEnabled(true);
+            userRepository.save(user);
+        }
     }
 
     @Transactional
