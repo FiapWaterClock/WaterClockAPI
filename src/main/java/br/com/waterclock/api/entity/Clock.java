@@ -13,6 +13,7 @@ public class Clock {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clock")
     private int id;
 
+    @Column(columnDefinition = "default true")
     private Boolean activate;
 
     private LocalDate intallation_date;
@@ -29,10 +30,11 @@ public class Clock {
     private User user;
 
     public Clock() {
+        this.activate = true;
     }
 
-    public Clock(Boolean activate, LocalDate intallation_date, String serial_number) {
-        this.activate = activate;
+    public Clock(LocalDate intallation_date, String serial_number) {
+        this.activate = true;
         this.intallation_date = intallation_date;
         this.serial_number = serial_number;
     }

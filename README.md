@@ -3,7 +3,8 @@
 ### Descrição
 WaterClockAPI é uma API destinada a intermediar a comunicação entre applicativo android, servidor mqtt e web site.
 
-### Documentação
+### Documentação endpoints:
 - [Autenticação](/docs/authentication.md).
 - [Consumo por relógio](/docs/get_all_consumption_by_id.md).
+- [Consumo mensal por relógio](/docs/get_all_consumption_by_id_and_time.md).
 
