@@ -1,5 +1,7 @@
 package br.com.waterclock.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -20,6 +22,11 @@ public class Clock {
     @OneToMany(mappedBy="clock", cascade=CascadeType.ALL,
             fetch=FetchType.LAZY)
     private List<Consumption> consumptions;
+
+    @ManyToOne
+    @JoinColumn(name="CD_USER")
+    @JsonIgnore
+    private User user;
 
     public Clock() {
     }
