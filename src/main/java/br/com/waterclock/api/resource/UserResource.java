@@ -36,7 +36,7 @@ public class UserResource {
 
     @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
     @GetMapping("{id}")
-    public User show(@PathVariable Long id) {
+    public User show(@PathVariable int id) {
         return repository.findById(id);
     }
 
@@ -80,7 +80,7 @@ public class UserResource {
 
     @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
     @PutMapping("{id}")
-    public User update(@RequestBody User user, @PathVariable Long id) {
+    public User update(@RequestBody User user, @PathVariable int id) {
         user.setId(id);
         return repository.save(user);
     }
