@@ -23,6 +23,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Order(2)
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     @Value("${security.signing-key}")
     private String signingKey;
 
