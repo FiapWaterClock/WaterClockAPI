@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClockRepository  extends JpaRepository <Clock, Integer> {
 
-    public Clock findById(int id);
+    Clock findById(int id);
 }
