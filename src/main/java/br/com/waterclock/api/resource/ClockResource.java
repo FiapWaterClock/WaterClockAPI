@@ -46,4 +46,6 @@ public class ClockResource {
     public void remove(@PathVariable int id) {
         repository.deleteById(id);
     }
+
+
 }

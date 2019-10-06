@@ -1,9 +1,12 @@
 package br.com.waterclock.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 @SequenceGenerator(name = "consumption", sequenceName = "SQ_CONSUMPTION", allocationSize = 1)
@@ -17,14 +20,14 @@ public class Consumption {
     @JsonIgnore
     private Clock clock;
 
-    @Temporal(TemporalType.DATE)
-    private Calendar time;
+    private LocalDate time;
 
     private double litersPerMinute;
 
     public Consumption(Clock clock, double litersPerMinute) {
         this.clock = clock;
         this.litersPerMinute = litersPerMinute;
+        this.time = LocalDate.now();
     }
 
     public Consumption(double litersPerMinute) {
@@ -50,11 +53,11 @@ public class Consumption {
         this.clock = clock;
     }
 
-    public Calendar getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
-    public void setTime(Calendar time) {
+    public void setTime(LocalDate time) {
         this.time = time;
     }
 

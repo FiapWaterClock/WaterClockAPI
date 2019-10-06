@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -38,4 +39,9 @@ public class ConsumptionResource {
         return repository.save(consumption);
     }
 
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
+    @GetMapping("clock/{clock_id}/month/{month}/year/{year}")
+    public List<Consumption> getConsumption(@PathVariable int clock_id, @PathVariable int month, @PathVariable int year) {
+        return repository.findByClockIdAndTimeBetween(clock_id, LocalDate.of(year, month, 1),LocalDate.of(year, month, 31));
+    }
 }
