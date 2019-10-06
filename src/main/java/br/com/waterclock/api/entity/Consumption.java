@@ -1,5 +1,7 @@
 package br.com.waterclock.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Calendar;
 
@@ -12,6 +14,7 @@ public class Consumption {
 
     @ManyToOne
     @JoinColumn(name="CD_CLOCK")
+    @JsonIgnore
     private Clock clock;
 
     @Temporal(TemporalType.DATE)
@@ -21,6 +24,10 @@ public class Consumption {
 
     public Consumption(Clock clock, double litersPerMinute) {
         this.clock = clock;
+        this.litersPerMinute = litersPerMinute;
+    }
+
+    public Consumption(double litersPerMinute) {
         this.litersPerMinute = litersPerMinute;
     }
 
@@ -58,4 +65,5 @@ public class Consumption {
     public void setLitersPerMinute(double litersPerMinute) {
         this.litersPerMinute = litersPerMinute;
     }
+
 }

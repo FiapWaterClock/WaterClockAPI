@@ -23,7 +23,7 @@
     + Body
         ```json
         {
-            "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoia2FAYXIuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTU3MDM1NDc1NiwiYXV0aG9yaXRpZXMiOlsiUkVBRF9QUklWSUxFR0UiXSwianRpIjoiNmM3ZmY4ZDQtNjBhNC00ZDVkLTgwNDctODFlY2QyOTIyMmQ0IiwiY2xpZW50X2lkIjoidGVzdGp3dGNsaWVudGlkIn0.iOHMnuXUN_0IXDe-oh2Kg5dO5_6-4fkVTabQ6_R1mMU",
+            "access_token": "YourTokenHere",
             "token_type": "bearer",
             "expires_in": 43199,
             "scope": "read write",

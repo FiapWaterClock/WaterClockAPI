@@ -12,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/consumption")
@@ -30,7 +29,7 @@ public class ConsumptionResource {
         return repository.findByClockId(clock_id);
     }
 
-    @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Consumption create(@RequestBody ConsumptionModel consumptionModel) {

@@ -17,7 +17,8 @@ public class Clock {
 
     private String serial_number;
 
-    @OneToMany(mappedBy="id", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="clock", cascade=CascadeType.ALL,
+            fetch=FetchType.LAZY)
     private List<Consumption> consumptions;
 
     public Clock() {
@@ -68,4 +69,10 @@ public class Clock {
     public void setConsumptions(List<Consumption> consumptions) {
         this.consumptions = consumptions;
     }
+
+    public void addConsumption(Consumption newConsumption) {
+        newConsumption.setClock(this);
+        this.consumptions.add(newConsumption);
+    }
+
 }
