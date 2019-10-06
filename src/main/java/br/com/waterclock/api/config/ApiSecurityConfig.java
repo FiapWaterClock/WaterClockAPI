@@ -22,68 +22,65 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Value("${security.signing-key}")
-	private String signingKey;
+    @Value("${security.signing-key}")
+    private String signingKey;
 
-	@Value("${security.encoding-strength}")
-	private Integer encodingStrength;
+    @Value("${security.encoding-strength}")
+    private Integer encodingStrength;
 
-	@Value("${security.security-realm}")
-	private String securityRealm;
+    @Value("${security.security-realm}")
+    private String securityRealm;
 
-	@Bean
-	@Override
-	protected AuthenticationManager authenticationManager() throws Exception {
-		return super.authenticationManager();
-	}
+    @Bean
+    @Override
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
 
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(11);
-	}
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(11);
+    }
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
 
-		http.headers().frameOptions().disable();
+        http.headers().frameOptions().sameOrigin();
 
-		http
-				.antMatcher( "/api/**")
-				.authorizeRequests()
-				.anyRequest()
-				.authenticated()
+        http
+                .antMatcher("/api/**")
 
-                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
-		        .httpBasic()
-		        .realmName(securityRealm)
+                .httpBasic()
+                .realmName(securityRealm)
 
                 .and()
                 .csrf()
                 .disable();
-	}
+    }
 
-	@Bean
-	public JwtAccessTokenConverter accessTokenConverter() {
-		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setSigningKey(signingKey);
-		return converter;
-	}
+    @Bean
+    public JwtAccessTokenConverter accessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey(signingKey);
+        return converter;
+    }
 
-	@Bean
-	public TokenStore tokenStore() {
-		return new JwtTokenStore(accessTokenConverter());
-	}
+    @Bean
+    public TokenStore tokenStore() {
+        return new JwtTokenStore(accessTokenConverter());
+    }
 
-	@Bean
-	@Primary //Making this primary to avoid any accidental duplication with another token service instance of the same name
-	public DefaultTokenServices tokenServices() {
-		DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-		defaultTokenServices.setTokenStore(tokenStore());
-		defaultTokenServices.setSupportRefreshToken(true);
-		return defaultTokenServices;
-	}
+    @Bean
+    @Primary
+    //Making this primary to avoid any accidental duplication with another token service instance of the same name
+    public DefaultTokenServices tokenServices() {
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setSupportRefreshToken(true);
+        return defaultTokenServices;
+    }
 }
