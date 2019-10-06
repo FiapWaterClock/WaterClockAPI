@@ -8,7 +8,6 @@ import br.com.waterclock.api.repository.ClockRepository;
 import br.com.waterclock.api.repository.ConsumptionRepository;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.eclipse.paho.client.mqttv3.*;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

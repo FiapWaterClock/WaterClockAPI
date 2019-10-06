@@ -11,7 +11,7 @@
 
     <springProfile name="!prod">
         <!-- configuration to be enabled when the "prod" profile is not active -->
-        <root level="debug">
+        <root level="info">
             <appender-ref ref="STDOUT"/>
         </root>
     </springProfile>
