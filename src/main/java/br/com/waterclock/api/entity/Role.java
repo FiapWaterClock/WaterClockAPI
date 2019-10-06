@@ -1,6 +1,8 @@
 package br.com.waterclock.api.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -53,6 +55,7 @@ public class Role {
         this.name = name;
     }
 
+    @JsonIgnore
     public Collection<User> getUsers() {
         return users;
     }
