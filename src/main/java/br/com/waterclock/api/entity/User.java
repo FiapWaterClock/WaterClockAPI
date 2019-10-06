@@ -2,20 +2,24 @@ package br.com.waterclock.api.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private boolean enabled;
     private boolean tokenExpired;
+
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL,
+            fetch=FetchType.LAZY)
+    private List<Clock> clock;
 
     @ManyToMany
     @JoinTable(
@@ -25,6 +29,17 @@ public class User {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
+
+    public User(String firstName, String lastName, String email, String password, boolean enabled, boolean tokenExpired, List<Clock> clock, Collection<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+        this.tokenExpired = tokenExpired;
+        this.clock = clock;
+        this.roles = roles;
+    }
 
     public User(String firstName, String lastName, String email, String password, boolean enabled, boolean tokenExpired, Collection<Role> roles) {
         this.firstName = firstName;
@@ -39,11 +54,11 @@ public class User {
     public User() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -103,8 +118,13 @@ public class User {
         this.roles = roles;
     }
 
+    public List<Clock> getClock() {
+        return clock;
+    }
 
-
+    public void setClock(List<Clock> clock) {
+        this.clock = clock;
+    }
 }
 
 
