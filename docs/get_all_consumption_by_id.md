@@ -1,5 +1,5 @@
 ## URL  [https://fiapwaterclock.herokuapp.com/api/consumption/{clock_id}]
-### Autenticação de usuário [POST]
+### Request de todo o consumo de água por relógio [GET]
 
 + Parameters
     + [token](/docs/authentication.md)
@@ -7,8 +7,8 @@
 + Request
     + Headers       
     ```json
-        Content-Type: "application/json;charset=UTF-8"
-        Authorization: "Bearer <YourTokenHere>"
+        "Content-Type": "application/json;charset=UTF-8"
+        "Authorization": "Bearer <YourTokenHere>"
       
     ```
     
