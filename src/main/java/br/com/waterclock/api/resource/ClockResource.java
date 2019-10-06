@@ -27,7 +27,7 @@ public class ClockResource {
         return repository.findById(id);
     }
 
-    @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
+    @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Clock create(@RequestBody Clock clock) {

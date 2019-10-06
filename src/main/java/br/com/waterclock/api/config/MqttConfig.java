@@ -1,8 +1,12 @@
 package br.com.waterclock.api.config;
 
-import org.eclipse.paho.client.mqttv3.*;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class MqttConfig {
 
     private String topic;
@@ -20,38 +24,20 @@ public class MqttConfig {
         this.password = "F1QexKFsttXE";
     }
 
-    public void configureMqtt(){
-
-        try {
-
-            MqttConnectOptions options = new MqttConnectOptions();
-            options.setCleanSession(true);
-            options.setUserName(username);
-            options.setPassword(password.toCharArray());
-            MqttClient client = new MqttClient(String.format("tcp://%s:%d", host, port),
-                    MqttClient.generateClientId(), new MemoryPersistence());
-            client.setCallback(new MqttCallback() {
-                @Override
-                public void connectionLost(Throwable throwable) {
-                    System.out.println("Connection to MQTT broker lost!");
-                }
-
-                @Override
-                public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-                    System.out.println("Message received:\n\t"+ new String(mqttMessage.getPayload()) );
-                }
-
-                @Override
-                public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-
-                }
-            });
-            client.connect(options);
-
-            client.subscribe(topic);
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
+    public MqttConnectOptions connectOptions(){
+        MqttConnectOptions options = new MqttConnectOptions();
+        options.setCleanSession(true);
+        options.setUserName(username);
+        options.setPassword(password.toCharArray());
+        return options;
     }
 
+    public MqttClient client() throws MqttException {
+        return new MqttClient(String.format("tcp://%s:%d", host, port),
+                MqttClient.generateClientId(), new MemoryPersistence());
+    }
+
+    public String getTopic() {
+        return topic;
+    }
 }
