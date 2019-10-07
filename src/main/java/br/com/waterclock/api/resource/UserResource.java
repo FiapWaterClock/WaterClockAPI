@@ -9,6 +9,7 @@ import br.com.waterclock.api.repository.UserRepository;
 import br.com.waterclock.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("/api/user")
 public class UserResource {
     @Autowired
     private UserRepository repository;
@@ -36,6 +37,7 @@ public class UserResource {
 
     @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
     @GetMapping("{id}")
+    @PostAuthorize("!hasAuthority('USER') || (returnObject != null && returnObject.email == authentication.principal)")
     public User show(@PathVariable int id) {
         return repository.findById(id);
     }
@@ -86,7 +88,7 @@ public class UserResource {
     }
 
     @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
-    @DeleteMapping("{id")
+    @DeleteMapping("{id}")
     public void remove(@PathVariable int id) {
         repository.deleteById(id);
     }

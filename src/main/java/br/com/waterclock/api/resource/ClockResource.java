@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/clock")
+@RequestMapping("/api/clock")
 public class ClockResource {
     @Autowired
     private ClockRepository repository;
@@ -42,10 +42,8 @@ public class ClockResource {
     }
 
     @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
-    @DeleteMapping("{id")
+    @DeleteMapping("{id}")
     public void remove(@PathVariable int id) {
         repository.deleteById(id);
     }
-
-
 }
