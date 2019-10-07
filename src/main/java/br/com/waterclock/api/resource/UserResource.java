@@ -35,11 +35,10 @@ public class UserResource {
         return repository.findAll();
     }
 
-    @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
-    @GetMapping("{id}")
+    @GetMapping("{email}")
     @PostAuthorize("!hasAuthority('USER') || (returnObject != null && returnObject.email == authentication.principal)")
-    public User show(@PathVariable int id) {
-        return repository.findById(id);
+    public User show(@PathVariable String email) {
+        return repository.findByEmail(email);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
