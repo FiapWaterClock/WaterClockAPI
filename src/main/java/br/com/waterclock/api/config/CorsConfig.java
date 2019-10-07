@@ -18,6 +18,7 @@ public class CorsConfig {
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedOrigin("https://waterclocksp.herokuapp.com");
+        config.addAllowedOrigin("https://fiapwaterclock.herokuapp.com");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
