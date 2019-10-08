@@ -13,7 +13,7 @@ public class Clock {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clock")
     private int id;
 
-    @Column(columnDefinition = "default true")
+    @Column
     private Boolean activate;
 
     private LocalDate intallation_date;
