@@ -53,15 +53,4 @@ public class ClockResource {
     public void remove(@PathVariable int id) {
         repository.deleteById(id);
     }
-
-
-    @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("inform_user_to_clock")
-    public Clock createClockUser(@RequestBody ClockModel clockModel) {
-        Clock clock = repository.findById(clockModel.getClockId());
-        User user = userRepository.findById(clockModel.getUserId());
-        clock.setUser(user);
-        return repository.save(clock);
-    }
 }
