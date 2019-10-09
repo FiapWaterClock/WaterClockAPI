@@ -24,6 +24,8 @@ public class UserDto {
     @NotEmpty
     private String email;
 
+    private String address;
+
     public UserDto(@NotNull @NotEmpty String firstName, @NotNull @NotEmpty String lastName, @NotNull @NotEmpty String password, String matchingPassword, @NotNull @NotEmpty String email) {
         this.firstName = firstName;
         this.lastName = lastName;
