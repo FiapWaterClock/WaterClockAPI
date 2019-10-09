@@ -5,6 +5,10 @@ WaterClockAPI é uma API destinada a intermediar a comunicação entre applicati
 
 ### Documentação endpoints:
 - [Autenticação](/docs/authentication.md).
+- [Relógio](/docs/clock.md) - CRUD.
+- [Usuário](/docs/user.md)
+
 - [Consumo por relógio](/docs/get_all_consumption_by_id.md).
 - [Consumo mensal por relógio](/docs/get_all_consumption_by_id_and_time.md).
+
 
