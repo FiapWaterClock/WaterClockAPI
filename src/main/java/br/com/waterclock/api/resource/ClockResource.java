@@ -1,7 +1,10 @@
 package br.com.waterclock.api.resource;
 
 import br.com.waterclock.api.entity.Clock;
+import br.com.waterclock.api.entity.User;
+import br.com.waterclock.api.model.ClockModel;
 import br.com.waterclock.api.repository.ClockRepository;
+import br.com.waterclock.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +15,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/clock")
 public class ClockResource {
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Autowired
     private ClockRepository repository;
 
@@ -45,5 +52,16 @@ public class ClockResource {
     @DeleteMapping("{id}")
     public void remove(@PathVariable int id) {
         repository.deleteById(id);
+    }
+
+
+    @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("inform_user_to_clock")
+    public Clock createClockUser(@RequestBody ClockModel clockModel) {
+        Clock clock = repository.findById(clockModel.getClockId());
+        User user = userRepository.findById(clockModel.getUserId());
+        clock.setUser(user);
+        return repository.save(clock);
     }
 }

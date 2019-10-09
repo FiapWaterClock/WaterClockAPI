@@ -25,7 +25,7 @@ public class Clock {
     private List<Consumption> consumptions;
 
     @ManyToOne
-    @JoinColumn(name="CD_USER")
+    @JoinColumn(name="cd_user")
     @JsonIgnore
     private User user;
 
@@ -84,4 +84,11 @@ public class Clock {
         this.consumptions.add(newConsumption);
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
