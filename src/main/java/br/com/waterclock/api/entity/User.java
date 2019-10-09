@@ -18,6 +18,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private String address;
     private boolean enabled;
     private boolean tokenExpired;
 
@@ -53,6 +54,26 @@ public class User {
         this.enabled = enabled;
         this.tokenExpired = tokenExpired;
         this.roles = roles;
+    }
+
+    public User(String firstName, String lastName, String email, String password, String address, boolean enabled, boolean tokenExpired, List<Clock> clock, Collection<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.enabled = enabled;
+        this.tokenExpired = tokenExpired;
+        this.clock = clock;
+        this.roles = roles;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public User() {
