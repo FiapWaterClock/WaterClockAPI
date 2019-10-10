@@ -1,9 +1,12 @@
 package br.com.waterclock.api.resource;
 
+import br.com.waterclock.api.entity.Clock;
 import br.com.waterclock.api.entity.User;
 import br.com.waterclock.api.entity.UserDto;
 import br.com.waterclock.api.exception.EmailExistsException;
 import br.com.waterclock.api.exception.PasswordException;
+import br.com.waterclock.api.model.ClockModel;
+import br.com.waterclock.api.repository.ClockRepository;
 import br.com.waterclock.api.repository.UserRepository;
 import br.com.waterclock.api.repository.UserRepository;
 import br.com.waterclock.api.service.UserService;
@@ -28,6 +31,9 @@ public class UserResource {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private ClockRepository clockRepository;
 
     @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
     @GetMapping
@@ -90,5 +96,16 @@ public class UserResource {
     @DeleteMapping("{id}")
     public void remove(@PathVariable int id) {
         repository.deleteById(id);
+    }
+
+    @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("clock_to_user")
+    public User createClockUser(@RequestBody ClockModel clockModel) {
+        Clock clock = clockRepository.findById(clockModel.getClockId());
+        User user = repository.findById(clockModel.getUserId());
+        clock.setUser(user);
+        clockRepository.save(clock);
+        return user;
     }
 }
