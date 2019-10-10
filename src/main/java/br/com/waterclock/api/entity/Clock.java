@@ -1,6 +1,9 @@
 package br.com.waterclock.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -25,8 +28,9 @@ public class Clock {
     private List<Consumption> consumptions;
 
     @ManyToOne
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name="cd_user")
-    @JsonIgnore
     private User user;
 
     public Clock() {
