@@ -18,7 +18,7 @@
         {
             "id": 5,
             "activate": true,
-            "intallation_date": "2014-01-01",
+            "installation_date": "2014-01-01",
             "serial_number": "8765sw7dsw337",
             "consumptions": [
                 {

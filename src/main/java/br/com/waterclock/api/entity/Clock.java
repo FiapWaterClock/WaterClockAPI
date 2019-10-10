@@ -16,7 +16,7 @@ public class Clock {
     @Column
     private Boolean activate;
 
-    private LocalDate intallation_date;
+    private LocalDate installation_date;
 
     private String serial_number;
 
@@ -33,9 +33,9 @@ public class Clock {
         this.activate = true;
     }
 
-    public Clock(LocalDate intallation_date, String serial_number) {
+    public Clock(LocalDate installation_date, String serial_number) {
         this.activate = true;
-        this.intallation_date = intallation_date;
+        this.installation_date = installation_date;
         this.serial_number = serial_number;
     }
 
@@ -55,12 +55,12 @@ public class Clock {
         this.activate = activate;
     }
 
-    public LocalDate getIntallation_date() {
-        return intallation_date;
+    public LocalDate getinstallation_date() {
+        return installation_date;
     }
 
-    public void setIntallation_date(LocalDate intallation_date) {
-        this.intallation_date = intallation_date;
+    public void setinstallation_date(LocalDate installation_date) {
+        this.installation_date = installation_date;
     }
 
     public String getSerial_number() {
