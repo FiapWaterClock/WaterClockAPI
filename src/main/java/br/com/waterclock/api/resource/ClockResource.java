@@ -38,12 +38,14 @@ public class ClockResource {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Clock create(@RequestBody Clock clock) {
+        clock.setUser(userRepository.findById(clock.getUser().getId()));
         return repository.save(clock);
     }
 
     @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
     @PutMapping("{id}")
     public Clock update(@RequestBody Clock clock, @PathVariable int id) {
+        clock.setUser(userRepository.findById(clock.getUser().getId()));
         clock.setId(id);
         return repository.save(clock);
     }
