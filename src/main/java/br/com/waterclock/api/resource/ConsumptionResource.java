@@ -44,4 +44,13 @@ public class ConsumptionResource {
     public List<Consumption> getConsumption(@PathVariable int clock_id, @PathVariable int month, @PathVariable int year) {
         return repository.findByClockIdAndTimeBetween(clock_id, LocalDate.of(year, month, 1),LocalDate.of(year, month, 31));
     }
+
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
+    @GetMapping("all/clock/{clock_id}/month/{month}/year/{year}")
+    public Consumption getConsumptionAll(@PathVariable int clock_id, @PathVariable int month, @PathVariable int year) {
+        return repository.findSumAllTimeBetween(clock_id, LocalDate.of(year, month, 1),LocalDate.of(year, month, 31));
+    }
+
+
+
 }
