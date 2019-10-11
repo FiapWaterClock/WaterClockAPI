@@ -41,11 +41,6 @@ public class UserResource {
         return repository.findAll();
     }
 
-    @GetMapping("{email}")
-    @PostAuthorize("!hasAuthority('USER') || (returnObject != null && returnObject.email == authentication.principal)")
-    public User show(@PathVariable String email) {
-        return repository.findByEmail(email);
-    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -76,6 +71,12 @@ public class UserResource {
         Map<String, String> errors = new HashMap<>();
         errors.put("error_description", ex.getMessage());
         return errors;
+    }
+
+    @GetMapping("{email}")
+    @PostAuthorize("!hasAuthority('READ_PRIVILEGE') || (returnObject != null && returnObject.email == authentication.principal)")
+    public User show(@PathVariable String email) {
+        return repository.findByEmail(email);
     }
 
     @PreAuthorize("isAnonymous()")
