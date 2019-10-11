@@ -38,7 +38,6 @@ public class ClockResource {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Clock create(@RequestBody Clock clock) {
-        clock.setUser(userRepository.findById(clock.getUser().getId()));
         return repository.save(clock);
     }
 
