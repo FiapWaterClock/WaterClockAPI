@@ -30,15 +30,15 @@ public class Rate {
         if (consumedWater < MINIMUMCONSUMPTION){
             return MINIMUNPRICE;
         } else if (consumedWater < CONSUMPTIONBAND1) {
-            return consumedWater * PRICE1;
+            return (consumedWater/1000) * PRICE1;
         } else if (consumedWater < CONSUMPTIONBAND2) {
-            return consumedWater * PRICE2;
+            return (consumedWater/1000) * PRICE2;
         } else if (consumedWater < CONSUMPTIONBAND3) {
-            return consumedWater * PRICE3;
+            return (consumedWater/1000) * PRICE3;
         } else if (consumedWater < CONSUMPTIONBAND4) {
-            return consumedWater * PRICE4;
+            return (consumedWater/1000) * PRICE4;
         } else {
-            return consumedWater * HIGHESTPRICE;
+            return (consumedWater/1000) * HIGHESTPRICE;
         }
     }
 
