@@ -6,6 +6,7 @@ import br.com.waterclock.api.entity.Consumption;
 import br.com.waterclock.api.model.ConsumptionModel;
 import br.com.waterclock.api.repository.ClockRepository;
 import br.com.waterclock.api.repository.ConsumptionRepository;
+import br.com.waterclock.api.service.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -44,4 +45,13 @@ public class ConsumptionResource {
     public List<Consumption> getConsumption(@PathVariable int clock_id, @PathVariable int month, @PathVariable int year) {
         return repository.findByClockIdAndTimeBetween(clock_id, LocalDate.of(year, month, 1),LocalDate.of(year, month, 31));
     }
+
+
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
+    @GetMapping("price/clock/{clock_id}/month/{month}/year/{year}")
+    public Rate getPrice(@PathVariable int clock_id, @PathVariable int month, @PathVariable int year) {
+        double consumedWater = repository.getConsumedWaterByMonth(clock_id, LocalDate.of(year, month, 1),LocalDate.of(year, month, 31));
+        return new Rate(consumedWater);
+    }
+
 }
