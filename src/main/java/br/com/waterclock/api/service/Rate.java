@@ -16,6 +16,7 @@ public class Rate {
 
     private double consumedWater;
     private String band;
+    private Double appliedRate;
     private double price;
 
 
@@ -28,16 +29,22 @@ public class Rate {
 
     public  double calculatePrice() {
         if (consumedWater < MINIMUMCONSUMPTION){
+            this.appliedRate = MINIMUNPRICE;
             return MINIMUNPRICE;
         } else if (consumedWater < CONSUMPTIONBAND1) {
+            this.appliedRate = PRICE1;
             return (consumedWater/1000) * PRICE1;
         } else if (consumedWater < CONSUMPTIONBAND2) {
+            this.appliedRate = PRICE2;
             return (consumedWater/1000) * PRICE2;
         } else if (consumedWater < CONSUMPTIONBAND3) {
+            appliedRate = PRICE3;
             return (consumedWater/1000) * PRICE3;
         } else if (consumedWater < CONSUMPTIONBAND4) {
+            appliedRate = PRICE4;
             return (consumedWater/1000) * PRICE4;
         } else {
+            appliedRate = HIGHESTPRICE;
             return (consumedWater/1000) * HIGHESTPRICE;
         }
     }
@@ -112,5 +119,9 @@ public class Rate {
 
     public static double getCONSUMPTIONBAND4() {
         return CONSUMPTIONBAND4;
+    }
+
+    public Double getAppliedRate() {
+        return appliedRate;
     }
 }
