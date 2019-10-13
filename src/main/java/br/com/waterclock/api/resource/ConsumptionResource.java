@@ -36,7 +36,7 @@ public class ConsumptionResource {
     @PostMapping
     public Consumption create(@RequestBody ConsumptionModel consumptionModel) {
         Clock clock = clockRepository.findById(consumptionModel.getClockId());
-        Consumption consumption = new Consumption(clock, consumptionModel.getLitersPerMinute());
+        Consumption consumption = new Consumption(clock, consumptionModel.getLitersPerMinute(), consumptionModel.getTime());
         return repository.save(consumption);
     }
 
