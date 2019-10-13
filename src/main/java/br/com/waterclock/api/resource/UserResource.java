@@ -86,7 +86,7 @@ public class UserResource {
         return service.registerNewUserAccount(user);
     }
 
-    @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
     @PutMapping("{id}")
     public User update(@RequestBody User user, @PathVariable int id) {
         user.setId(id);

@@ -44,6 +44,7 @@ public class ClockResource {
     @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
     @PutMapping("{id}")
     public Clock update(@RequestBody Clock clock, @PathVariable int id) {
+        clock.setUser(userRepository.findById(clock.getUser().getId()));
         clock.setId(id);
         return repository.save(clock);
     }

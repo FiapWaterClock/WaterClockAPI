@@ -46,7 +46,6 @@ public class ConsumptionResource {
         return repository.findByClockIdAndTimeBetween(clock_id, LocalDate.of(year, month, 1),LocalDate.of(year, month, 31));
     }
 
-
     @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
     @GetMapping("price/clock/{clock_id}/month/{month}/year/{year}")
     public Rate getPrice(@PathVariable int clock_id, @PathVariable int month, @PathVariable int year) {
@@ -54,4 +53,9 @@ public class ConsumptionResource {
         return new Rate(consumedWater);
     }
 
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
+    @GetMapping("all/clock/{clock_id}/month/{month}/year/{year}")
+    public Consumption getConsumptionAll(@PathVariable int clock_id, @PathVariable int month, @PathVariable int year) {
+        return repository.findSumAllTimeBetween(clock_id, LocalDate.of(year, month, 1),LocalDate.of(year, month, 31));
+    }
 }

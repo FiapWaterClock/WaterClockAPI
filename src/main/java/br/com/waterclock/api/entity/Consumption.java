@@ -30,6 +30,11 @@ public class Consumption {
         this.time = LocalDate.now();
     }
 
+    public Consumption(LocalDate time, double litersPerMinute) {
+        this.litersPerMinute = litersPerMinute;
+        this.time = time;
+    }
+
     public Consumption(double litersPerMinute) {
         this.litersPerMinute = litersPerMinute;
     }
