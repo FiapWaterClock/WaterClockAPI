@@ -73,8 +73,9 @@ public class UserResource {
         return errors;
     }
 
-    @GetMapping("{email}")
-    @PostAuthorize("!hasAuthority('READ_PRIVILEGE') || (returnObject != null && returnObject.email == authentication.principal)")
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
+    @GetMapping("email/{email}")
+    //@PostAuthorize("!hasAuthority('READ_PRIVILEGE') || (returnObject != null && returnObject.email == authentication.principal)")
     public User show(@PathVariable String email) {
         return repository.findByEmail(email);
     }
