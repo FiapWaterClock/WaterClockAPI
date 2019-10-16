@@ -1,4 +1,4 @@
-package br.com.waterclock.api.service;
+package br.com.waterclock.api.model;
 
 public class Rate {
     private static final double MINIMUNPRICE = 28.98;
