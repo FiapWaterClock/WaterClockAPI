@@ -4,9 +4,10 @@ package br.com.waterclock.api.resource;
 import br.com.waterclock.api.entity.Clock;
 import br.com.waterclock.api.entity.Consumption;
 import br.com.waterclock.api.model.ConsumptionModel;
+import br.com.waterclock.api.model.MonthConsumptionModel;
 import br.com.waterclock.api.repository.ClockRepository;
 import br.com.waterclock.api.repository.ConsumptionRepository;
-import br.com.waterclock.api.service.Rate;
+import br.com.waterclock.api.model.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -57,5 +58,14 @@ public class ConsumptionResource {
     @GetMapping("all/clock/{clock_id}/month/{month}/year/{year}")
     public Consumption getConsumptionAll(@PathVariable int clock_id, @PathVariable int month, @PathVariable int year) {
         return repository.findSumAllTimeBetween(clock_id, LocalDate.of(year, month, 1),LocalDate.of(year, month, 31));
+    }
+
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE')")
+    @GetMapping("all/month/clock/{clock_id}/month/{month}/year/{year}")
+    public MonthConsumptionModel getConsumptionMonth(@PathVariable int clock_id, @PathVariable int month, @PathVariable int year) {
+        double consumedWater = repository.getConsumedWaterByMonth(clock_id, LocalDate.of(year, month, 1),LocalDate.of(year, month, 31));
+        Consumption consumptionMonth = repository.findSumAllTimeBetween(clock_id, LocalDate.of(year, month, 1), LocalDate.of(year, month, 31));
+        List<Consumption> consumptionDays = repository.findByClockIdAndTimeBetween(clock_id, LocalDate.of(year, month, 1), LocalDate.of(year, month, 31));
+        return new MonthConsumptionModel(consumptionMonth, consumptionDays, new Rate(consumedWater));
     }
 }
